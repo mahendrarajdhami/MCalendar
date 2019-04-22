@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="np.com.mahendrarajdhami.mcalendar_sample.MainActivity">
+
+    <np.com.mahendrarajdhami.mcalendar.CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:eventsEnabled="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:type="one_day_picker" />
+    <android.support.v7.widget.CardView
+        android:id="@+id/cvIndicators"
+        app:layout_constraintTop_toBottomOf="@id/calendarView"
+        android:layout_width="match_parent"
+        app:cardElevation="4dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        >
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.constraint.Guideline
+                android:id="@+id/gll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="10dp"/>
+            <android.support.constraint.Guideline
+                android:id="@+id/glr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="10dp"/>
+            <TextView
+                android:id="@+id/tvAttendanceIndication"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Indicates Present"
+                android:drawableLeft="@drawable/ic_indicator_present"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="@id/gll"
+                />
+            <TextView
+                android:layout_marginLeft="20dp"
+                android:id="@+id/tvLeaveIndication"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_indicator_leave"
+                android:text="Leave"
+                app:layout_constraintTop_toTopOf="@id/tvAttendanceIndication"
+                app:layout_constraintStart_toEndOf="@id/tvAttendanceIndication"
+                />
+
+            <TextView
+                android:layout_marginLeft="20dp"
+                android:id="@+id/tvHolidayIndication"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_indicator_holiday"
+                android:text="Holiday"
+                app:layout_constraintTop_toTopOf="@id/tvAttendanceIndication"
+                app:layout_constraintStart_toEndOf="@id/tvLeaveIndication"
+                />
+            <TextView
+                app:layout_constraintStart_toStartOf="@id/gll"
+                android:layout_marginTop="10dp"
+                android:id="@+id/tvSaturdayIndication"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_indicator_saturday"
+                android:text="Saturday"
+                app:layout_constraintTop_toBottomOf="@id/tvAttendanceIndication"
+                />
+
+        </android.support.constraint.ConstraintLayout>
+
+
+
+    </android.support.v7.widget.CardView>
+
+    <Button
+        android:id="@+id/btnCheckinCheckout"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:background="@drawable/orange_rounded_button_effect"
+        android:backgroundTint="?attr/colorPrimary"
+        android:text="Checkin"
+        android:textAllCaps="true"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/cvIndicators"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>
