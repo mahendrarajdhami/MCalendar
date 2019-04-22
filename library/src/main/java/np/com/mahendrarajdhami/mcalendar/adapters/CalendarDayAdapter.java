@@ -86,12 +86,12 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
 
         // Set view for all SelectedDays
         if (isSelectedDay(day)) {
-            /*Stream.of(mCalendarPageAdapter.getSelectedDays())
+            Stream.of(mCalendarPageAdapter.getSelectedDays())
                     .filter(selectedDay -> selectedDay.getCalendar().equals(day))
                     .findFirst().ifPresent(selectedDay -> selectedDay.setView(dayLabel));
 
             DayColorsUtils.setSelectedDayColors(dayLabel, mCalendarProperties);
-            return;*/
+            return;
         }
 
         // Setting disabled days color
@@ -103,7 +103,7 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
 
         // Setting current month day color
 
-        //DayColorsUtils.setCurrentMonthDayColors(day, mToday, dayLabel, mCalendarProperties);
+        DayColorsUtils.setCurrentMonthDayColors(day, mToday, dayLabel, mCalendarProperties);
 
     }
 
