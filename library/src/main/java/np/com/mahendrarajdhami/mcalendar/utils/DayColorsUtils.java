@@ -34,6 +34,14 @@ public class DayColorsUtils {
         textView.setBackgroundResource(background);
     }
 
+    public static void setSaturdayColor(TextView dayLabel, CalendarProperties calendarProperties) {
+        setDayColors(dayLabel, calendarProperties.getSelectionLabelColor(), Typeface.NORMAL,
+                R.drawable.background_color_circle_selector);
+
+        dayLabel.getBackground().setColorFilter(calendarProperties.getSaturdaysLabelsColor(),
+                android.graphics.PorterDuff.Mode.MULTIPLY);
+    }
+
     /**
      * This method sets a color of the text, font type and a background of a TextView object.
      * It is used to set day cell (numbers) style in the case of selected day (when calendar is in

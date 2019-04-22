@@ -4,8 +4,12 @@
     <color name="currentMonthDayColor">#de000000</color>
     <color name="nextMonthDayColor">#1F000000</color>
     <color name="disabledDialogButtonColor">#1F000000</color>
-
     <color name="itemHighlightColor">#1F000000</color>
-
     <color name="defaultColor">#2962FF</color>
+
+    <!--Days Color-->
+    <color name="colorSaturday">#FF8CCA</color>
+    <color name="colorLeave">#ffcc0000</color>
+    <color name="colorPresent">#4AFF1E</color>
+
 </resources>

@@ -79,6 +79,13 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
 
     private void setLabelColors(TextView dayLabel, Calendar day) {
         // Setting not current month day color
+        int tempDay = day.get(Calendar.DAY_OF_WEEK);
+        if(isCurrentMonthDay(day) && tempDay == 7){ //saturday
+            DayColorsUtils.setSaturdayColor(dayLabel,mCalendarProperties);
+            //DayColorsUtils.setDayColors(dayLabel, mCalendarProperties.getSaturdaysLabelsColor(), Typeface.NORMAL, R.drawable.background_transparent);
+            return;
+
+        }
         if (!isCurrentMonthDay(day)) {
             DayColorsUtils.setDayColors(dayLabel, mCalendarProperties.getAnotherMonthsDaysLabelsColor(), Typeface.NORMAL, R.drawable.background_transparent);
             return;

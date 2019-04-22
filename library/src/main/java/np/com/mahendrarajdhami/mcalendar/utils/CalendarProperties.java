@@ -37,7 +37,7 @@ public class CalendarProperties {
     private int mCalendarType, mHeaderColor, mHeaderLabelColor, mSelectionColor, mTodayLabelColor,
             mDialogButtonsColor, mItemLayoutResource, mDisabledDaysLabelsColor, mPagesColor,
             mAbbreviationsBarColor, mAbbreviationsLabelsColor, mDaysLabelsColor, mSelectionLabelColor,
-            mAnotherMonthsDaysLabelsColor, mHeaderVisibility;
+            mAnotherMonthsDaysLabelsColor,mSaturdaydaysLabelsColor,mLeavedaysLabelsColor, mHeaderVisibility;
 
     private boolean mEventsEnabled;
     private boolean mSwipeEnabled;
@@ -355,8 +355,32 @@ public class CalendarProperties {
         return mAnotherMonthsDaysLabelsColor;
     }
 
+    public int getSaturdaysLabelsColor() {
+
+        if (mSaturdaydaysLabelsColor == 0) {
+            return ContextCompat.getColor(mContext, R.color.colorSaturday);
+        }
+        return mSaturdaydaysLabelsColor;
+    }
+
+    public int getLeavesDaysLabelsColor() {
+
+        if (mLeavedaysLabelsColor == 0) {
+            return ContextCompat.getColor(mContext, R.color.colorLeave);
+        }
+        return mLeavedaysLabelsColor;
+    }
+
     public void setAnotherMonthsDaysLabelsColor(int anotherMonthsDaysLabelsColor) {
         mAnotherMonthsDaysLabelsColor = anotherMonthsDaysLabelsColor;
+    }
+
+    public void setSaturdaysLabelsColor(int tempColor) {
+        mSaturdaydaysLabelsColor = tempColor;
+    }
+
+    public void setLeavesDaysLabelsColor(int tempColor) {
+        mLeavedaysLabelsColor = tempColor;
     }
 
     public int getHeaderVisibility() {
