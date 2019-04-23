@@ -25,7 +25,9 @@ import np.com.mahendrarajdhami.mcalendar.listeners.OnCalendarPageChangeListener;
 import np.com.mahendrarajdhami.mcalendar.listeners.OnDayClickListener;
 import np.com.mahendrarajdhami.mcalendar.utils.AppearanceUtils;
 import np.com.mahendrarajdhami.mcalendar.utils.CalendarProperties;
+import np.com.mahendrarajdhami.mcalendar.utils.DateConverter;
 import np.com.mahendrarajdhami.mcalendar.utils.DateUtils;
+import np.com.mahendrarajdhami.mcalendar.utils.Model;
 import np.com.mahendrarajdhami.mcalendar.utils.SelectedDay;
 
 import static np.com.mahendrarajdhami.mcalendar.utils.CalendarProperties.FIRST_VISIBLE_PAGE;
@@ -326,7 +328,6 @@ public class CalendarView extends LinearLayout {
 
     private void setHeaderName(Calendar calendar, int position) {
         mCurrentMonthLabel.setText(DateUtils.getMonthAndYearDate(mContext, calendar,true));
-        //mCurrentMonthLabel.setText("statice date");
         callOnPageChangeListeners(position);
     }
 

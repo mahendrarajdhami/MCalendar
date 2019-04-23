@@ -99,10 +99,15 @@ public class DateUtils {
     }
 
     public static String getMonthAndYearDate(Context context, Calendar calendar,boolean returnNepaliDate) {
+        DateConverter dt = new DateConverter();
+        Model tempCalendar = dt.getNepaliDate(calendar);
+        int tempMonth = tempCalendar.getMonth();
+        int tempYear = tempCalendar.getYear();
+        int tempDay = tempCalendar.getDay();
 
         return String.format("%s  %s",
-                context.getResources().getStringArray(R.array.material_calendar_months_array_nep)[calendar.get(Calendar.MONTH)],
-                calendar.get(Calendar.YEAR));
+                context.getResources().getStringArray(R.array.material_calendar_months_array_nep)[tempMonth],
+                tempYear);
     }
 
     /**
