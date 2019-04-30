@@ -177,14 +177,16 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
             return;
         }
 
-        Stream.of(mCalendarProperties.getLeaveDays()).filter(leaveDate ->
+        Stream.of(mCalendarProperties.getLeaveDays())
+                .filter(leaveDate ->
                 leaveDate.getCalendar().equals(day)).findFirst().executeIfPresent(eventDay -> {
-            DayColorsUtils.setLeaveDayColor(dayLabel,mCalendarProperties);
 
-            // If a day doesn't belong to current month then background is transparent
-            if (!isCurrentMonthDay(day) || !isActiveDay(day)) {
-                dayLabel.setAlpha(0.12f);
-            }
+                    DayColorsUtils.setLeaveDayColor(dayLabel,mCalendarProperties);
+
+                    // If a day doesn't belong to current month then background is transparent
+                    if (!isCurrentMonthDay(day) || !isActiveDay(day)) {
+                        dayLabel.setAlpha(0.12f);
+                    }
 
         });
 

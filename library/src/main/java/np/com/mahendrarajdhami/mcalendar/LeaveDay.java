@@ -18,6 +18,7 @@ public class LeaveDay {
      * @param day Calendar object which represents a date of the event
      */
     public LeaveDay(Calendar day) {
+        DateUtils.setMidnight(day);
         mDay = day;
     }
 

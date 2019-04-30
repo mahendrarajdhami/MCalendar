@@ -72,11 +72,11 @@ public class CalendarActivity extends AppCompatActivity {
         //return LeaveDay.getAllLeaves();
         List<LeaveDay> leaves = new ArrayList<>();
         Calendar calendar1 = Calendar.getInstance();
-        leaves.add(new LeaveDay(calendar1, np.com.mahendrarajdhami.mcalendar_sample.utils.DrawableUtils.getCircleDrawableWithText(this, "P")));
+        leaves.add(new LeaveDay(calendar1));
 
         Calendar calendar2 = Calendar.getInstance();
         calendar2.add(Calendar.DAY_OF_MONTH, 2);
-        leaves.add(new LeaveDay(calendar2, DrawableUtils.getCircleDrawableWithText(this,"S",R.drawable.shape_background_saturday)));
+        leaves.add(new LeaveDay(calendar2));
         return leaves;
     }
 
