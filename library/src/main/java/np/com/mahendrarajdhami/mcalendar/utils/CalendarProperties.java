@@ -13,6 +13,7 @@ import java.util.List;
 import np.com.mahendrarajdhami.mcalendar.CalendarView;
 import np.com.mahendrarajdhami.mcalendar.EventDay;
 import np.com.mahendrarajdhami.mcalendar.LeaveDay;
+import np.com.mahendrarajdhami.mcalendar.PresentDay;
 import np.com.mahendrarajdhami.mcalendar.R;
 import np.com.mahendrarajdhami.mcalendar.exceptions.ErrorsMessages;
 import np.com.mahendrarajdhami.mcalendar.exceptions.UnsupportedMethodsException;
@@ -38,10 +39,11 @@ public class CalendarProperties {
     private int mCalendarType, mHeaderColor, mHeaderLabelColor, mSelectionColor, mTodayLabelColor,
             mDialogButtonsColor, mItemLayoutResource, mDisabledDaysLabelsColor, mPagesColor,
             mAbbreviationsBarColor, mAbbreviationsLabelsColor, mDaysLabelsColor, mSelectionLabelColor,
-            mAnotherMonthsDaysLabelsColor,mSaturdaydaysLabelsColor,mLeavedaysLabelsColor, mHeaderVisibility;
+            mAnotherMonthsDaysLabelsColor,mSaturdaydaysLabelsColor,mLeavedaysLabelsColor,mPresentdaysLabelsColor, mHeaderVisibility;
 
     private boolean mEventsEnabled;
     private boolean mLeavesEnabled;
+    private boolean mPresentEnabled;
     private boolean mSwipeEnabled;
 
     private Drawable mPreviousButtonSrc, mForwardButtonSrc;
@@ -57,6 +59,7 @@ public class CalendarProperties {
 
     private List<EventDay> mEventDays = new ArrayList<>();
     private List<LeaveDay> mLeaveDays = new ArrayList<>();
+    private List<PresentDay> mPresentDays = new ArrayList<>();
     private List<Calendar> mDisabledDays = new ArrayList<>();
     private List<SelectedDay> mSelectedDays = new ArrayList<>();
 
@@ -78,6 +81,10 @@ public class CalendarProperties {
         return mLeavesEnabled;
     }
 
+    public boolean getPresentEnabled() {
+        return mPresentEnabled;
+    }
+
     public boolean getEventsEnabled() {
         return mEventsEnabled;
     }
@@ -88,6 +95,10 @@ public class CalendarProperties {
 
     public void setLeavesEnabled(boolean leavesEnabled) {
         mLeavesEnabled = leavesEnabled;
+    }
+
+    public void setPresentEnabled(boolean presentEnabled) {
+        mPresentEnabled = presentEnabled;
     }
 
     public boolean getSwipeEnabled() {
@@ -254,12 +265,20 @@ public class CalendarProperties {
         return mLeaveDays;
     }
 
+    public List<PresentDay> getPresentDays() {
+        return mPresentDays;
+    }
+
     public void setEventDays(List<EventDay> eventDays) {
         mEventDays = eventDays;
     }
 
     public void setLeaveDays(List<LeaveDay> leaveDays) {
         mLeaveDays = leaveDays;
+    }
+
+    public void setPresentDays(List<PresentDay> presentDays) {
+        mPresentDays = presentDays;
     }
 
     public List<Calendar> getDisabledDays() {
@@ -388,6 +407,14 @@ public class CalendarProperties {
             return ContextCompat.getColor(mContext, R.color.colorLeave);
         }
         return mLeavedaysLabelsColor;
+    }
+
+    public int getPresentDaysLabelsColor() {
+
+        if (mPresentdaysLabelsColor == 0) {
+            return ContextCompat.getColor(mContext, R.color.colorPresent);
+        }
+        return mPresentdaysLabelsColor;
     }
 
     public void setAnotherMonthsDaysLabelsColor(int anotherMonthsDaysLabelsColor) {

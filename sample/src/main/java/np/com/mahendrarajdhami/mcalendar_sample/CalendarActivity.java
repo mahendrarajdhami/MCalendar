@@ -13,6 +13,7 @@ import java.util.Random;
 import np.com.mahendrarajdhami.mcalendar.CalendarView;
 import np.com.mahendrarajdhami.mcalendar.EventDay;
 import np.com.mahendrarajdhami.mcalendar.LeaveDay;
+import np.com.mahendrarajdhami.mcalendar.PresentDay;
 import np.com.mahendrarajdhami.mcalendar.utils.DateUtils;
 import np.com.mahendrarajdhami.mcalendar_sample.utils.DrawableUtils;
 
@@ -38,6 +39,8 @@ public class CalendarActivity extends AppCompatActivity {
 
         List<LeaveDay> myLeaves = getLeaveDays();
         calendarView.setLeaves(myLeaves);
+
+        calendarView.setPresents(getPresentDays());
 
         //calendarView.setDisabledDays(getDisabledDays());
 
@@ -78,6 +81,16 @@ public class CalendarActivity extends AppCompatActivity {
         calendar2.add(Calendar.DAY_OF_MONTH, 2);
         leaves.add(new LeaveDay(calendar2));
         return leaves;
+    }
+
+    private List<PresentDay> getPresentDays(){
+
+        List<PresentDay> presentDays = new ArrayList<>();
+
+        Calendar calendar2 = Calendar.getInstance();
+        calendar2.add(Calendar.DAY_OF_MONTH, 2);
+        presentDays.add(new PresentDay(calendar2));
+        return presentDays;
     }
 
     private List<Calendar> getDisabledDays() {

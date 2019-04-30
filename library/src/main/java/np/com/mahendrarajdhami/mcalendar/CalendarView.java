@@ -173,6 +173,9 @@ public class CalendarView extends LinearLayout {
         //enable showing leave
         mCalendarProperties.setLeavesEnabled(true);
 
+        //enable showing present
+        mCalendarProperties.setPresentEnabled(true);
+
         boolean swipeEnabled = typedArray.getBoolean(R.styleable.CalendarView_swipeEnabled, true);
         mCalendarProperties.setSwipeEnabled(swipeEnabled);
 
@@ -411,6 +414,20 @@ public class CalendarView extends LinearLayout {
     public void setLeaves(List<LeaveDay> leaveDays) {
         if (mCalendarProperties.getLeavesEnabled()) {
             mCalendarProperties.setLeaveDays(leaveDays);
+            mCalendarPageAdapter.notifyDataSetChanged();
+        }
+    }
+
+    /**
+     * This method is used to set a list of attendance (present) displayed in calendar cells,
+     * visible as changed background.
+     *
+     * @param presentDays List of PresentDay objects
+     * @see PresentDay
+     */
+    public void setPresents(List<PresentDay> presentDays) {
+        if (mCalendarProperties.getPresentEnabled()) {
+            mCalendarProperties.setPresentDays(presentDays);
             mCalendarPageAdapter.notifyDataSetChanged();
         }
     }

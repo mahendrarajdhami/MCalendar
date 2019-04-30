@@ -66,6 +66,7 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
         setLabelColors(dayLabel, day);
         //setEventColor(dayLabel,day);
         setLeaveColor(dayLabel,day);
+        setPresentColor(dayLabel,day);
 
         int yr = day.get(Calendar.YEAR);
         int mn = day.get(Calendar.MONTH);
@@ -187,6 +188,28 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
                     if (!isCurrentMonthDay(day) || !isActiveDay(day)) {
                         dayLabel.setAlpha(0.12f);
                     }
+
+        });
+
+
+    }
+
+    private void setPresentColor(TextView dayLabel,Calendar day){
+
+        if (mCalendarProperties.getPresentDays() == null || !mCalendarProperties.getPresentEnabled()) {
+            return;
+        }
+
+        Stream.of(mCalendarProperties.getPresentDays())
+                .filter(presentDate ->
+                        presentDate.getCalendar().equals(day)).findFirst().executeIfPresent(eventDay -> {
+
+            DayColorsUtils.setPresentDayColor(dayLabel,mCalendarProperties);
+
+            // If a day doesn't belong to current month then background is transparent
+            if (!isCurrentMonthDay(day) || !isActiveDay(day)) {
+                dayLabel.setAlpha(0.12f);
+            }
 
         });
 
