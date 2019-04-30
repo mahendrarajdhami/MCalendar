@@ -59,11 +59,13 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
         day.setTime(getItem(position));
 
         // Loading an image of the event
-        if (dayIcon != null) {
+        /*if (dayIcon != null) {
             loadIcon(dayIcon, day);
-        }
+        }*/
 
         setLabelColors(dayLabel, day);
+        //setEventColor(dayLabel,day);
+        setLeaveColor(dayLabel,day);
 
         int yr = day.get(Calendar.YEAR);
         int mn = day.get(Calendar.MONTH);
@@ -86,6 +88,7 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
             return;
 
         }
+
         if (!isCurrentMonthDay(day)) {
             DayColorsUtils.setDayColors(dayLabel, mCalendarProperties.getAnotherMonthsDaysLabelsColor(), Typeface.NORMAL, R.drawable.background_transparent);
             return;
@@ -146,5 +149,45 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
             }
 
         });
+    }
+
+    private void setEventColor(TextView dayLabel,Calendar day){
+
+        if (mCalendarProperties.getEventDays() == null || !mCalendarProperties.getEventsEnabled()) {
+            return;
+        }
+
+        Stream.of(mCalendarProperties.getEventDays()).filter(eventDate ->
+                eventDate.getCalendar().equals(day)).findFirst().executeIfPresent(eventDay -> {
+                    DayColorsUtils.setSaturdayColor(dayLabel,mCalendarProperties);
+
+                    // If a day doesn't belong to current month then background is transparent
+                    if (!isCurrentMonthDay(day) || !isActiveDay(day)) {
+                        //dayIcon.setAlpha(0.12f);
+                    }
+
+        });
+
+
+    }
+
+    private void setLeaveColor(TextView dayLabel,Calendar day){
+
+        if (mCalendarProperties.getLeaveDays() == null || !mCalendarProperties.getLeavesEnabled()) {
+            return;
+        }
+
+        Stream.of(mCalendarProperties.getLeaveDays()).filter(leaveDate ->
+                leaveDate.getCalendar().equals(day)).findFirst().executeIfPresent(eventDay -> {
+            DayColorsUtils.setLeaveDayColor(dayLabel,mCalendarProperties);
+
+            // If a day doesn't belong to current month then background is transparent
+            if (!isCurrentMonthDay(day) || !isActiveDay(day)) {
+                dayLabel.setAlpha(0.12f);
+            }
+
+        });
+
+
     }
 }

@@ -170,6 +170,9 @@ public class CalendarView extends LinearLayout {
                 mCalendarProperties.getCalendarType() == CLASSIC);
         mCalendarProperties.setEventsEnabled(eventsEnabled);
 
+        //enable showing leave
+        mCalendarProperties.setLeavesEnabled(true);
+
         boolean swipeEnabled = typedArray.getBoolean(R.styleable.CalendarView_swipeEnabled, true);
         mCalendarProperties.setSwipeEnabled(swipeEnabled);
 
@@ -394,6 +397,20 @@ public class CalendarView extends LinearLayout {
     public void setEvents(List<EventDay> eventDays) {
         if (mCalendarProperties.getEventsEnabled()) {
             mCalendarProperties.setEventDays(eventDays);
+            mCalendarPageAdapter.notifyDataSetChanged();
+        }
+    }
+
+    /**
+     * This method is used to set a list of leaves displayed in calendar cells,
+     * visible as changed background.
+     *
+     * @param leaveDays List of Leave objects
+     * @see LeaveDay
+     */
+    public void setLeaves(List<LeaveDay> leaveDays) {
+        if (mCalendarProperties.getLeavesEnabled()) {
+            mCalendarProperties.setLeaveDays(leaveDays);
             mCalendarPageAdapter.notifyDataSetChanged();
         }
     }

@@ -12,6 +12,7 @@ import java.util.List;
 
 import np.com.mahendrarajdhami.mcalendar.CalendarView;
 import np.com.mahendrarajdhami.mcalendar.EventDay;
+import np.com.mahendrarajdhami.mcalendar.LeaveDay;
 import np.com.mahendrarajdhami.mcalendar.R;
 import np.com.mahendrarajdhami.mcalendar.exceptions.ErrorsMessages;
 import np.com.mahendrarajdhami.mcalendar.exceptions.UnsupportedMethodsException;
@@ -40,6 +41,7 @@ public class CalendarProperties {
             mAnotherMonthsDaysLabelsColor,mSaturdaydaysLabelsColor,mLeavedaysLabelsColor, mHeaderVisibility;
 
     private boolean mEventsEnabled;
+    private boolean mLeavesEnabled;
     private boolean mSwipeEnabled;
 
     private Drawable mPreviousButtonSrc, mForwardButtonSrc;
@@ -54,6 +56,7 @@ public class CalendarProperties {
     private OnCalendarPageChangeListener mOnForwardPageChangeListener;
 
     private List<EventDay> mEventDays = new ArrayList<>();
+    private List<LeaveDay> mLeaveDays = new ArrayList<>();
     private List<Calendar> mDisabledDays = new ArrayList<>();
     private List<SelectedDay> mSelectedDays = new ArrayList<>();
 
@@ -71,12 +74,20 @@ public class CalendarProperties {
         mCalendarType = calendarType;
     }
 
+    public boolean getLeavesEnabled() {
+        return mLeavesEnabled;
+    }
+
     public boolean getEventsEnabled() {
         return mEventsEnabled;
     }
 
     public void setEventsEnabled(boolean eventsEnabled) {
         mEventsEnabled = eventsEnabled;
+    }
+
+    public void setLeavesEnabled(boolean leavesEnabled) {
+        mLeavesEnabled = leavesEnabled;
     }
 
     public boolean getSwipeEnabled() {
@@ -239,8 +250,16 @@ public class CalendarProperties {
         return mEventDays;
     }
 
+    public List<LeaveDay> getLeaveDays() {
+        return mLeaveDays;
+    }
+
     public void setEventDays(List<EventDay> eventDays) {
         mEventDays = eventDays;
+    }
+
+    public void setLeaveDays(List<LeaveDay> leaveDays) {
+        mLeaveDays = leaveDays;
     }
 
     public List<Calendar> getDisabledDays() {

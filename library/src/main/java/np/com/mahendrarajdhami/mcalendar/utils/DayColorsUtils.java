@@ -42,6 +42,14 @@ public class DayColorsUtils {
                 android.graphics.PorterDuff.Mode.MULTIPLY);
     }
 
+    public static void setLeaveDayColor(TextView dayLabel, CalendarProperties calendarProperties) {
+        setDayColors(dayLabel, calendarProperties.getSelectionLabelColor(), Typeface.NORMAL,
+                R.drawable.background_color_circle_selector);
+
+        dayLabel.getBackground().setColorFilter(calendarProperties.getLeavesDaysLabelsColor(),
+                android.graphics.PorterDuff.Mode.MULTIPLY);
+    }
+
     /**
      * This method sets a color of the text, font type and a background of a TextView object.
      * It is used to set day cell (numbers) style in the case of selected day (when calendar is in

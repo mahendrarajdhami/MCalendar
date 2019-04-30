@@ -18,6 +18,8 @@ import np.com.mahendrarajdhami.mcalendar.R;
 import np.com.mahendrarajdhami.mcalendar.extensions.CalendarGridView;
 import np.com.mahendrarajdhami.mcalendar.listeners.DayRowClickListener;
 import np.com.mahendrarajdhami.mcalendar.utils.CalendarProperties;
+import np.com.mahendrarajdhami.mcalendar.utils.DateConverter;
+import np.com.mahendrarajdhami.mcalendar.utils.Model;
 import np.com.mahendrarajdhami.mcalendar.utils.SelectedDay;
 
 import static np.com.mahendrarajdhami.mcalendar.utils.CalendarProperties.CALENDAR_SIZE;
@@ -104,10 +106,19 @@ public class CalendarPageAdapter extends PagerAdapter {
      * @param position Position of current page in ViewPager
      */
     private void loadMonth(int position) {
+
         ArrayList<Date> days = new ArrayList<>();
 
         // Get Calendar object instance
         Calendar calendar = (Calendar) mCalendarProperties.getFirstPageCalendarDate().clone();
+
+        DateConverter dc = new DateConverter();
+        Model tempModel = dc.getNepaliDate(calendar);
+        int tempYear = tempModel.getYear();
+        int tempMonth = tempModel.getMonth();
+        int tempDay = tempModel.getDay();
+        int tempFirstDayOfWeek = tempModel.getDayOfWeek();
+        int tempDayOfWeek = dc.getFirstWeekDayMonth(tempYear,tempMonth);
 
         // Add months to Calendar (a number of months depends on ViewPager position)
         calendar.add(Calendar.MONTH, position);
@@ -135,10 +146,10 @@ public class CalendarPageAdapter extends PagerAdapter {
             days.add(calendar.getTime());
             Log.i("time",String.valueOf(calendar.getTime()));
             calendar.add(Calendar.DAY_OF_MONTH, 1);
-            int tempYear = calendar.get(Calendar.YEAR);
+            /*int tempYear = calendar.get(Calendar.YEAR);
             int tempMonth = calendar.get(Calendar.MONTH);
-            int tempDay = calendar.get(Calendar.DAY_OF_MONTH);
-            int tempFirstDayOfWeek = calendar.getFirstDayOfWeek();
+            int tempDay = calendar.get(Calendar.DAY_OF_MONTH);*/
+            //int tempFirstDayOfWeek = calendar.getFirstDayOfWeek();
             Log.i("CalendarPageAdapter","Load Month");
         }
 

@@ -39,8 +39,6 @@ public class DateConverter {
          month "Baisakh", index 2 refers to second month "Jesth" and so on.
          */
 
-        // based on https://github.com/bahadurbaniya/Date-Converter-Bikram-Sambat-to-English-Date/blob/master/src/main/java/np/com/converter/date/nepali/Lookup.java
-
         daysInMonthMap.put(1970, new int[]{0, 31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30});
         daysInMonthMap.put(1971, new int[]{0, 31, 31, 32, 31, 32, 30, 30, 29, 30, 29, 30, 30});
         daysInMonthMap.put(1972, new int[]{0, 31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31});
@@ -169,25 +167,10 @@ public class DateConverter {
         daysInMonthMap.put(2090, new int[]{0, 30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 30, 30});
 
         Log.i("Date Converter","daysInMonthMap");
-
-        /* *//*new*//*
-        // based on https://github.com/bahadurbaniya/Date-Converter-Bikram-Sambat-to-English-Date/blob/master/src/main/java/np/com/converter/date/nepali/Lookup.java
-        daysInMonthMap.put(2091, new int[]{31, 31, 32, 31, 31, 31, 30, 30, 29, 30, 30, 30});// 2091
-        daysInMonthMap.put(2092, new int[]{31, 31, 32, 32, 31, 30, 30, 30, 29, 30, 30, 30});// 2092
-        daysInMonthMap.put(2093, new int[]{31, 32, 31, 32, 31, 30, 30, 30, 29, 30, 30, 30});// 2093
-        daysInMonthMap.put(2094, new int[]{31, 31, 32, 31, 31, 30, 30, 30, 29, 30, 30, 30});// 2094
-        daysInMonthMap.put(2095, new int[]{31, 31, 32, 31, 31, 31, 30, 29, 30, 30, 30, 30});// 2095
-        daysInMonthMap.put(2096, new int[]{30, 31, 32, 32, 31, 30, 30, 29, 30, 29, 30, 30});// 2096
-        daysInMonthMap.put(2097, new int[]{31, 32, 31, 32, 31, 30, 30, 30, 29, 30, 30, 30});// 2097
-        daysInMonthMap.put(2098, new int[]{31, 31, 32, 31, 31, 31, 29, 30, 29, 30, 30, 31});// 2098
-        daysInMonthMap.put(2099, new int[]{31, 31, 32, 31, 31, 31, 30, 29, 29, 30, 30, 30});// 2099
-        daysInMonthMap.put(2100, new int[]{31, 32, 31, 32, 30, 31, 30, 29, 30, 29, 30, 30});// 2100
-        */
-//        return daysInMonthMap;
     }
 
     private void getStartWeekDayMonthMap() {
-//        if (startWeekDayMonthMap != null) return startWeekDayMonthMap;
+        //if (startWeekDayMonthMap != null) return startWeekDayMonthMap;
         startWeekDayMonthMap = new SparseArray<>();
 
         /*
@@ -196,7 +179,6 @@ public class DateConverter {
          month "Baisakh", index 2 refers to second month "Jesth" and so on.
          */
 
-        // based on www.ashesh.com.np/neplai-date-converter
         startWeekDayMonthMap.put(1970, new int[]{0, 1, 4, 7, 4, 7, 3, 6, 1, 2, 4, 5, 7});
         startWeekDayMonthMap.put(1971, new int[]{0, 2, 5, 1, 5, 1, 5, 7, 2, 3, 5, 6, 1});
         startWeekDayMonthMap.put(1972, new int[]{0, 3, 6, 3, 6, 3, 6, 1, 3, 5, 6, 7, 2});
@@ -321,19 +303,7 @@ public class DateConverter {
         startWeekDayMonthMap.put(2089, new int[]{0, 4, 6, 3, 6, 3, 6, 1, 3, 5, 6, 1, 3});
         startWeekDayMonthMap.put(2090, new int[]{0, 5, 7, 4, 7, 4, 7, 2, 4, 6, 7, 2, 4});
         Log.i("Date Converter","startWeekDayMonthMap");
-        /*  *//*start of new but dummy data just for test todo fix with real data*//*
-        startWeekDayMonthMap.put(2091, new int[]{0, 5, 1, 4, 1, 4, 7, 3, 5, 6, 1, 2, 4});
-        startWeekDayMonthMap.put(2092, new int[]{0, 6, 2, 5, 2, 6, 2, 4, 6, 7, 2, 3, 5});
-        startWeekDayMonthMap.put(2093, new int[]{0, 7, 3, 7, 3, 7, 3, 5, 7, 2, 3, 4, 6});
-        startWeekDayMonthMap.put(2094, new int[]{0, 2, 4, 1, 4, 1, 4, 6, 1, 3, 4, 6, 7});
-        startWeekDayMonthMap.put(2095, new int[]{0, 3, 6, 2, 6, 2, 5, 1, 3, 4, 6, 7, 2});
-        startWeekDayMonthMap.put(2096, new int[]{0, 4, 7, 3, 7, 4, 7, 2, 4, 5, 7, 1, 3});
-        startWeekDayMonthMap.put(2097, new int[]{0, 5, 1, 5, 1, 5, 1, 3, 5, 7, 1, 2, 4});
-        startWeekDayMonthMap.put(2098, new int[]{0, 7, 3, 6, 2, 6, 2, 5, 6, 1, 3, 4, 5});
-        startWeekDayMonthMap.put(2099, new int[]{0, 1, 4, 7, 4, 7, 3, 6, 1, 2, 4, 5, 7});
-        startWeekDayMonthMap.put(2100, new int[]{0, 4, 6, 3, 6, 3, 6, 1, 3, 5, 6, 1, 2});
-        */
-//        return startWeekDayMonthMap;
+
     }
 
     /**
@@ -518,7 +488,8 @@ public class DateConverter {
         int tempYear = date.get(Calendar.YEAR);
         int tempMonth = date.get(Calendar.MONTH)+1;
         int tempDayOfMonth = date.get(Calendar.DAY_OF_MONTH);
-        return getNepaliDate(tempYear, tempMonth, tempDayOfMonth);
+        Model tempModel = getNepaliDate(tempYear, tempMonth, tempDayOfMonth);
+        return tempModel;
     }
 
     /**

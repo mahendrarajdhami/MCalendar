@@ -20,6 +20,8 @@ public class DateUtils {
      */
     public static Calendar getCalendar() {
         Calendar calendar = Calendar.getInstance();
+        /*DateConverter dt = new DateConverter();
+        Model tempModel = dt.getNepaliDate(calendar);*/
         setMidnight(calendar);
 
         return calendar;

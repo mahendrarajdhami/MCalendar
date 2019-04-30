@@ -12,6 +12,7 @@ import java.util.Random;
 
 import np.com.mahendrarajdhami.mcalendar.CalendarView;
 import np.com.mahendrarajdhami.mcalendar.EventDay;
+import np.com.mahendrarajdhami.mcalendar.LeaveDay;
 import np.com.mahendrarajdhami.mcalendar.utils.DateUtils;
 import np.com.mahendrarajdhami.mcalendar_sample.utils.DrawableUtils;
 
@@ -32,7 +33,11 @@ public class CalendarActivity extends AppCompatActivity {
         calendarView.setMinimumDate(min);
         calendarView.setMaximumDate(max);
 
-        //calendarView.setEvents(createEvents());
+        /*List<EventDay> myEvents = createEvents();
+        calendarView.setEvents(myEvents);*/
+
+        List<LeaveDay> myLeaves = getLeaveDays();
+        calendarView.setLeaves(myLeaves);
 
         //calendarView.setDisabledDays(getDisabledDays());
 
@@ -49,8 +54,6 @@ public class CalendarActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         events.add(new EventDay(calendar, np.com.mahendrarajdhami.mcalendar_sample.utils.DrawableUtils.getCircleDrawableWithText(this, "P")));
 
-
-
         Calendar calendar1 = Calendar.getInstance();
         calendar1.add(Calendar.DAY_OF_MONTH, 4);
         events.add(new EventDay(calendar1, DrawableUtils.getCircleDrawableWithText(this,"S",R.drawable.shape_background_saturday)));
@@ -59,22 +62,22 @@ public class CalendarActivity extends AppCompatActivity {
         calendar2.add(Calendar.DAY_OF_MONTH, 11);
         events.add(new EventDay(calendar2,DrawableUtils.getCircleDrawableWithText(this,"S",R.drawable.shape_background_saturday)));
 
-
-
-        /*Calendar calendar2 = Calendar.getInstance();
-        calendar2.add(Calendar.DAY_OF_MONTH, 5);
-        events.add(new EventDay(calendar2, R.drawable.sample_icon_3));*/
-
-        /*Calendar calendar3 = Calendar.getInstance();
-        calendar3.add(Calendar.DAY_OF_MONTH, 7);
-        events.add(new EventDay(calendar3, R.drawable.sample_four_icons));*/
-
-        /*Calendar calendar4 = Calendar.getInstance();
-        calendar4.add(Calendar.DAY_OF_MONTH, 13);
-        events.add(new EventDay(calendar4, DrawableUtils.getThreeDots(this)));*/
-
         return events;
 
+    }
+
+    private List<LeaveDay> getLeaveDays(){
+
+
+        //return LeaveDay.getAllLeaves();
+        List<LeaveDay> leaves = new ArrayList<>();
+        Calendar calendar1 = Calendar.getInstance();
+        leaves.add(new LeaveDay(calendar1, np.com.mahendrarajdhami.mcalendar_sample.utils.DrawableUtils.getCircleDrawableWithText(this, "P")));
+
+        Calendar calendar2 = Calendar.getInstance();
+        calendar2.add(Calendar.DAY_OF_MONTH, 2);
+        leaves.add(new LeaveDay(calendar2, DrawableUtils.getCircleDrawableWithText(this,"S",R.drawable.shape_background_saturday)));
+        return leaves;
     }
 
     private List<Calendar> getDisabledDays() {
