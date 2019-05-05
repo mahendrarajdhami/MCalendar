@@ -15,6 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:type="one_day_picker" />
+
     <android.support.v7.widget.CardView
         android:id="@+id/cvIndicators"
         app:layout_constraintTop_toBottomOf="@id/calendarView"
@@ -102,9 +103,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         />
-
-
-
-
 
 </android.support.constraint.ConstraintLayout>

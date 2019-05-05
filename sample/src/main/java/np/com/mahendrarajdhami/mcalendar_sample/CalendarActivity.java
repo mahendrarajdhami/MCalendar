@@ -1,7 +1,15 @@
 package np.com.mahendrarajdhami.mcalendar_sample;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -16,37 +24,54 @@ import np.com.mahendrarajdhami.mcalendar.LeaveDay;
 import np.com.mahendrarajdhami.mcalendar.PresentDay;
 import np.com.mahendrarajdhami.mcalendar.utils.DateUtils;
 import np.com.mahendrarajdhami.mcalendar_sample.utils.DrawableUtils;
+import np.com.mahendrarajdhami.mcalendar_sample.utils.MFunction;
 
 public class CalendarActivity extends AppCompatActivity {
+    Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calendar_activity);
+        mContext = this;
         setTitle("Attendance");
         CalendarView calendarView = (CalendarView) findViewById(R.id.calendarView);
         Calendar min = Calendar.getInstance();
-        min.add(Calendar.YEAR, -1);
+        DateUtils.setMidnight(min);
+        min.set(min.get(Calendar.YEAR)-1,0, 1);
 
         Calendar max = Calendar.getInstance();
-        max.add(Calendar.MONTH, 2);
+        max.set(max.get(Calendar.YEAR),max.get(Calendar.MONTH),max.getActualMaximum(Calendar.DAY_OF_MONTH));
+
 
         calendarView.setMinimumDate(min);
         calendarView.setMaximumDate(max);
 
-        /*List<EventDay> myEvents = createEvents();
-        calendarView.setEvents(myEvents);*/
-
-        List<LeaveDay> myLeaves = getLeaveDays();
-        calendarView.setLeaves(myLeaves);
-
+        calendarView.setLeaves(getLeaveDays());
         calendarView.setPresents(getPresentDays());
 
+        //calendarView.setEvents(createEvents());
         //calendarView.setDisabledDays(getDisabledDays());
 
         calendarView.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-        calendarView.setOnDayClickListener(eventDay -> Toast.makeText(getApplicationContext(), eventDay.getCalendar().getTime().toString() + " " + eventDay.isEnabled(), Toast.LENGTH_SHORT).show());
+        calendarView.setOnDayClickListener(
+                eventDay -> showDayDialog()
+        );
         calendarView.setHeaderColor(R.color.colorPrimaryDark);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home: {
+                finish();
+                return true;
+            }
+
+            default: {
+                return super.onOptionsItemSelected(item);
+            }
+        }
     }
 
     private List<EventDay> createEvents(){
@@ -74,22 +99,19 @@ public class CalendarActivity extends AppCompatActivity {
 
         //return LeaveDay.getAllLeaves();
         List<LeaveDay> leaves = new ArrayList<>();
-        Calendar calendar1 = Calendar.getInstance();
-        leaves.add(new LeaveDay(calendar1));
 
-        Calendar calendar2 = Calendar.getInstance();
-        calendar2.add(Calendar.DAY_OF_MONTH, 2);
-        leaves.add(new LeaveDay(calendar2));
+        leaves.add(new LeaveDay(MFunction.getCalendarFromStrdate("2019-05-09")));
+        leaves.add(new LeaveDay(MFunction.getCalendarFromStrdate("2019-05-16")));
         return leaves;
     }
 
     private List<PresentDay> getPresentDays(){
 
         List<PresentDay> presentDays = new ArrayList<>();
-
-        Calendar calendar2 = Calendar.getInstance();
-        calendar2.add(Calendar.DAY_OF_MONTH, 2);
-        presentDays.add(new PresentDay(calendar2));
+        presentDays.add(new PresentDay(MFunction.getCalendarFromStrdate("2019-05-01")));
+        presentDays.add(new PresentDay(MFunction.getCalendarFromStrdate("2019-05-02")));
+        presentDays.add(new PresentDay(MFunction.getCalendarFromStrdate("2019-05-03")));
+        presentDays.add(new PresentDay(MFunction.getCalendarFromStrdate("2019-05-05")));
         return presentDays;
     }
 
@@ -117,4 +139,33 @@ public class CalendarActivity extends AppCompatActivity {
         calendar.add(Calendar.MONTH, random.nextInt(99));
         return calendar;
     }
+
+    public void showDayDialog() {
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(mContext);
+        LayoutInflater inflater = getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.dialog_day_detail, null);
+        dialogBuilder.setView(dialogView);
+
+        TextView tvPendingBill = dialogView.findViewById(R.id.tvPendingBillValue);
+        TextView tvLessThan30 = dialogView.findViewById(R.id.tvLT30DaysValue);
+        TextView tvBetween30to60 = dialogView.findViewById(R.id.tvB30To60DaysValue);
+        TextView tvBetween60to90 = dialogView.findViewById(R.id.tvB60To90DaysValue);
+        TextView tvGreaterThan90 = dialogView.findViewById(R.id.tvGT90DaysValue);
+        TextView tvOnAccount = dialogView.findViewById(R.id.tvOnAccountValue);
+
+        dialogBuilder.setTitle("Day Detail");
+
+        dialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+            }
+        });
+
+        AlertDialog b = dialogBuilder.create();
+        //b.getWindow().getAttributes().windowAnimations = R.style.DialogTheme;
+        b.getWindow().setBackgroundDrawableResource(R.drawable.rounded_white_background);
+        b.show();
+    }
+
 }

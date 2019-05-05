@@ -13,4 +13,6 @@
 
     <color name="flatorange">#c64f1e</color>
     <color name="flatorangelite">#ef895e</color>
+
+    <color name="white">#ffffff</color>
 </resources>

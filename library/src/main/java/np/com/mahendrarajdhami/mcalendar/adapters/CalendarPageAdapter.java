@@ -112,13 +112,13 @@ public class CalendarPageAdapter extends PagerAdapter {
         // Get Calendar object instance
         Calendar calendar = (Calendar) mCalendarProperties.getFirstPageCalendarDate().clone();
 
-        DateConverter dc = new DateConverter();
+        /*DateConverter dc = new DateConverter();
         Model tempModel = dc.getNepaliDate(calendar);
         int tempYear = tempModel.getYear();
         int tempMonth = tempModel.getMonth();
         int tempDay = tempModel.getDay();
         int tempFirstDayOfWeek = tempModel.getDayOfWeek();
-        int tempDayOfWeek = dc.getFirstWeekDayMonth(tempYear,tempMonth);
+        int tempDayOfWeek = dc.getFirstWeekDayMonth(tempYear,tempMonth);*/
 
         // Add months to Calendar (a number of months depends on ViewPager position)
         calendar.add(Calendar.MONTH, position);
@@ -142,7 +142,7 @@ public class CalendarPageAdapter extends PagerAdapter {
         (a part of previous month, current month and a part of next month))
          */
 
-        while (days.size() < 35) {
+        while (days.size() < 42) {
             days.add(calendar.getTime());
             Log.i("time",String.valueOf(calendar.getTime()));
             calendar.add(Calendar.DAY_OF_MONTH, 1);

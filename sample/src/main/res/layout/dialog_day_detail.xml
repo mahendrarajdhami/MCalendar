@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="tvPendingBill,tvLT30Days,tvGT90Days"
+        app:barrierDirection="end"/>
+    <TextView
+        android:id="@+id/tvPendingBill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pending Bill "
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvPendingBillValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="290900"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toRightOf="@id/barrier"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <TextView
+        android:id="@+id/tvLT30Days"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Less Than 30 Days"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvPendingBill"/>
+
+    <TextView
+        android:id="@+id/tvLT30DaysValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2000"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toRightOf="@id/barrier"
+        app:layout_constraintTop_toBottomOf="@id/tvPendingBill"/>
+    <TextView
+        android:id="@+id/tvB30To60Days"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Between 30-60 Days"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvLT30Days"/>
+
+    <TextView
+        android:id="@+id/tvB30To60DaysValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2000"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toRightOf="@id/barrier"
+        app:layout_constraintTop_toBottomOf="@id/tvLT30Days"/>
+    <TextView
+        android:id="@+id/tvB60To90Days"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Between 60-90 Days"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvB30To60Days"/>
+
+    <TextView
+        android:id="@+id/tvB60To90DaysValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2000"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toRightOf="@id/barrier"
+        app:layout_constraintTop_toBottomOf="@id/tvB30To60Days"/>
+    <TextView
+        android:id="@+id/tvGT90Days"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Greater Than 90 Days"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvB60To90Days"/>
+
+    <TextView
+        android:id="@+id/tvGT90DaysValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2000"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toRightOf="@id/barrier"
+        app:layout_constraintTop_toBottomOf="@id/tvB60To90Days"/>
+
+    <TextView
+        android:id="@+id/tvOnAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="On Account"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvGT90Days"/>
+
+    <TextView
+        android:id="@+id/tvOnAccountValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2000"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toRightOf="@id/barrier"
+        app:layout_constraintTop_toBottomOf="@id/tvGT90Days"/>
+
+</android.support.constraint.ConstraintLayout>

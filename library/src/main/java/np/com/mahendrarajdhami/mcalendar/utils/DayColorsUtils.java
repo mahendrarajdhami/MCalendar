@@ -85,8 +85,7 @@ public class DayColorsUtils {
      * @param dayLabel           TextView containing a day number
      * @param calendarProperties A resource of a color used to mark today day
      */
-    public static void setCurrentMonthDayColors(Calendar day, Calendar today, TextView dayLabel,
-                                                CalendarProperties calendarProperties) {
+    public static void setCurrentMonthDayColors(Calendar day, Calendar today, TextView dayLabel, CalendarProperties calendarProperties) {
         if (today.equals(day)) {
             setDayColors(dayLabel, calendarProperties.getTodayLabelColor(), Typeface.BOLD,
                     R.drawable.background_transparent);
