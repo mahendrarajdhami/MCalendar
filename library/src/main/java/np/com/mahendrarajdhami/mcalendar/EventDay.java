@@ -20,6 +20,8 @@ public class EventDay {
     private Calendar mDay;
     private Object mDrawable;
     private boolean mIsDisabled;
+    private String data_type; //class name
+    private String data;
 
     /**
      * @param day Calendar object which represents a date of the event
@@ -36,6 +38,9 @@ public class EventDay {
         DateUtils.setMidnight(day);
         mDay = day;
         mDrawable = drawable;
+    }
+
+    public EventDay() {
     }
 
     /**
