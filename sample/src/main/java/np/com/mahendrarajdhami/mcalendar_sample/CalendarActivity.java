@@ -85,7 +85,7 @@ public class CalendarActivity extends AppCompatActivity {
         List<EventDay> events = new ArrayList<>();
 
         EventDay eventDay1 = new EventDay();
-        eventDay1.setData("2019-06-21");
+        /*eventDay1.setData("2019-06-21");
         eventDay1.setDataType("Leave");
         eventDay1.setData("");
         events.add(eventDay1);
@@ -101,7 +101,7 @@ public class CalendarActivity extends AppCompatActivity {
         eventDay3.setDataType("Leave");
         eventDay3.setData("");
         events.add(eventDay3);
-
+*/
 
         /*
         Calendar calendar2 = Calendar.getInstance();
