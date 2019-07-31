@@ -22,6 +22,7 @@ import np.com.mahendrarajdhami.mcalendar.CalendarView;
 import np.com.mahendrarajdhami.mcalendar.EventDay;
 import np.com.mahendrarajdhami.mcalendar.LeaveDay;
 import np.com.mahendrarajdhami.mcalendar.PresentDay;
+import np.com.mahendrarajdhami.mcalendar.listeners.OnDayClickListener;
 import np.com.mahendrarajdhami.mcalendar.utils.DateUtils;
 import np.com.mahendrarajdhami.mcalendar_sample.utils.DrawableUtils;
 import np.com.mahendrarajdhami.mcalendar_sample.utils.MFunction;
@@ -50,13 +51,17 @@ public class CalendarActivity extends AppCompatActivity {
         calendarView.setLeaves(getLeaveDays());
         calendarView.setPresents(getPresentDays());
 
-        //calendarView.setEvents(createEvents());
+        calendarView.setEvents(createEvents());
         //calendarView.setDisabledDays(getDisabledDays());
 
         calendarView.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-        calendarView.setOnDayClickListener(
-                eventDay -> showDayDialog()
-        );
+        calendarView.setOnDayClickListener(new OnDayClickListener() {
+            @Override
+            public void onDayClick(EventDay eventDay) {
+                Toast.makeText(mContext,MFunction.getStrDateFromCalendar(eventDay.getCalendar()), Toast.LENGTH_SHORT).show();
+            }
+        });
+
         calendarView.setHeaderColor(R.color.colorPrimaryDark);
     }
 
@@ -76,20 +81,33 @@ public class CalendarActivity extends AppCompatActivity {
 
     private List<EventDay> createEvents(){
 
-        Calendar temp = Calendar.getInstance();
 
         List<EventDay> events = new ArrayList<>();
-        Calendar calendar = Calendar.getInstance();
-        events.add(new EventDay(calendar, np.com.mahendrarajdhami.mcalendar_sample.utils.DrawableUtils.getCircleDrawableWithText(this, "P")));
 
-        Calendar calendar1 = Calendar.getInstance();
-        calendar1.add(Calendar.DAY_OF_MONTH, 4);
-        events.add(new EventDay(calendar1, DrawableUtils.getCircleDrawableWithText(this,"S",R.drawable.shape_background_saturday)));
+        EventDay eventDay1 = new EventDay();
+        eventDay1.setData("2019-06-21");
+        eventDay1.setDataType("Leave");
+        eventDay1.setData("");
+        events.add(eventDay1);
 
+        EventDay eventDay2 = new EventDay();
+        eventDay2.setData("2019-06-22");
+        eventDay2.setDataType("Leave");
+        eventDay2.setData("");
+        events.add(eventDay2);
+
+        EventDay eventDay3 = new EventDay();
+        eventDay3.setData("2019-06-23");
+        eventDay3.setDataType("Leave");
+        eventDay3.setData("");
+        events.add(eventDay3);
+
+
+        /*
         Calendar calendar2 = Calendar.getInstance();
         calendar2.add(Calendar.DAY_OF_MONTH, 11);
         events.add(new EventDay(calendar2,DrawableUtils.getCircleDrawableWithText(this,"S",R.drawable.shape_background_saturday)));
-
+        */
         return events;
 
     }

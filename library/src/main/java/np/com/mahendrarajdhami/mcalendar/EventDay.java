@@ -20,6 +20,7 @@ public class EventDay {
     private Calendar mDay;
     private Object mDrawable;
     private boolean mIsDisabled;
+
     private String data_type; //class name
     private String data;
 

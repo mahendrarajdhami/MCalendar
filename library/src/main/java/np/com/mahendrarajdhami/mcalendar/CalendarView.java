@@ -25,9 +25,7 @@ import np.com.mahendrarajdhami.mcalendar.listeners.OnCalendarPageChangeListener;
 import np.com.mahendrarajdhami.mcalendar.listeners.OnDayClickListener;
 import np.com.mahendrarajdhami.mcalendar.utils.AppearanceUtils;
 import np.com.mahendrarajdhami.mcalendar.utils.CalendarProperties;
-import np.com.mahendrarajdhami.mcalendar.utils.DateConverter;
 import np.com.mahendrarajdhami.mcalendar.utils.DateUtils;
-import np.com.mahendrarajdhami.mcalendar.utils.Model;
 import np.com.mahendrarajdhami.mcalendar.utils.SelectedDay;
 
 import static np.com.mahendrarajdhami.mcalendar.utils.CalendarProperties.FIRST_VISIBLE_PAGE;
@@ -175,6 +173,8 @@ public class CalendarView extends LinearLayout {
 
         //enable showing present
         mCalendarProperties.setPresentEnabled(true);
+
+        mCalendarProperties.setHolidayEnabled(true);
 
         boolean swipeEnabled = typedArray.getBoolean(R.styleable.CalendarView_swipeEnabled, true);
         mCalendarProperties.setSwipeEnabled(swipeEnabled);
@@ -333,7 +333,7 @@ public class CalendarView extends LinearLayout {
     }
 
     private void setHeaderName(Calendar calendar, int position) {
-        mCurrentMonthLabel.setText(DateUtils.getMonthAndYearDate(mContext, calendar,true));
+        mCurrentMonthLabel.setText(DateUtils.getMonthAndYearDate(mContext, calendar, true));
         callOnPageChangeListeners(position);
     }
 
@@ -428,6 +428,13 @@ public class CalendarView extends LinearLayout {
     public void setPresents(List<PresentDay> presentDays) {
         if (mCalendarProperties.getPresentEnabled()) {
             mCalendarProperties.setPresentDays(presentDays);
+            mCalendarPageAdapter.notifyDataSetChanged();
+        }
+    }
+
+    public void setHolidays(List<HoliDay> holidays) {
+        if (mCalendarProperties.getHolidayEnabled()) {
+            mCalendarProperties.setHoliDays(holidays);
             mCalendarPageAdapter.notifyDataSetChanged();
         }
     }

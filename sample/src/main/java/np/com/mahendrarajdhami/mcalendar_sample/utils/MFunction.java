@@ -23,4 +23,10 @@ public class MFunction {
         tempCalendar.setTime(tempDate);
         return tempCalendar;
     }
+
+    public static String getStrDateFromCalendar(Calendar calendar){
+        long milis = calendar.getTimeInMillis();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        return formatter.format(milis);
+    }
 }

@@ -14,12 +14,16 @@ import java.util.List;
 import np.com.mahendrarajdhami.mcalendar.CalendarUtils;
 import np.com.mahendrarajdhami.mcalendar.CalendarView;
 import np.com.mahendrarajdhami.mcalendar.EventDay;
+import np.com.mahendrarajdhami.mcalendar.HoliDay;
+import np.com.mahendrarajdhami.mcalendar.LeaveDay;
+import np.com.mahendrarajdhami.mcalendar.PresentDay;
 import np.com.mahendrarajdhami.mcalendar.R;
 import np.com.mahendrarajdhami.mcalendar.adapters.CalendarPageAdapter;
 import np.com.mahendrarajdhami.mcalendar.utils.CalendarProperties;
 import np.com.mahendrarajdhami.mcalendar.utils.DateUtils;
 import np.com.mahendrarajdhami.mcalendar.utils.DayColorsUtils;
 import np.com.mahendrarajdhami.mcalendar.utils.SelectedDay;
+
 
 /**
  * This class is responsible for handle click events
@@ -63,6 +67,7 @@ public class DayRowClickListener implements AdapterView.OnItemClickListener {
             case CalendarView.CLASSIC:
                 mCalendarPageAdapter.setSelectedDay(new SelectedDay(view, day));
         }
+
     }
 
     private void selectOneDay(View view, Calendar day) {
@@ -72,8 +77,68 @@ public class DayRowClickListener implements AdapterView.OnItemClickListener {
 
         if (isAnotherDaySelected(previousSelectedDay, day)) {
             selectDay(dayLabel, day);
-            reverseUnselectedColor(previousSelectedDay);
+            if (dayIsHoliday(previousSelectedDay.getCalendar())) {
+                if (previousSelectedDay.getCalendar().get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY) {
+                    reverseHolidayColor(previousSelectedDay);
+                } else {
+                    reverseUnselectedColor(previousSelectedDay);
+                }
+            } else if (dayIsLeaveDay(previousSelectedDay.getCalendar())) {
+                reverseLeaveColor(previousSelectedDay);
+            } else if (dayIsPresentDay(previousSelectedDay.getCalendar())) {
+                reversePresentColor(previousSelectedDay);
+            } else {
+                reverseUnselectedColor(previousSelectedDay);
+            }
         }
+
+
+    }
+
+
+    private void reversePresentColor(SelectedDay selectedDay) {
+        DayColorsUtils.setPresentDayColor((TextView) selectedDay.getView(), mCalendarProperties);
+
+    }
+
+    private void reverseLeaveColor(SelectedDay selectedDay) {
+        DayColorsUtils.setLeaveDayColor((TextView) selectedDay.getView(), mCalendarProperties);
+
+    }
+
+    private void reverseHolidayColor(SelectedDay selectedDay) {
+        DayColorsUtils.setSaturdayColor((TextView) selectedDay.getView(), mCalendarProperties);
+
+    }
+
+    private boolean dayIsLeaveDay(Calendar day) {
+        List<LeaveDay> leaveDays = mCalendarProperties.getLeaveDays();
+        for (LeaveDay leaveDay : leaveDays) {
+            if (leaveDay.getCalendar().get(Calendar.DAY_OF_YEAR) == day.get(Calendar.DAY_OF_YEAR) && leaveDay.getCalendar().get(Calendar.YEAR) == day.get(Calendar.YEAR)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean dayIsHoliday(Calendar day) {
+        List<HoliDay> holiDays = mCalendarProperties.getHoliDays();
+        for (HoliDay holiDay : holiDays) {
+            if (holiDay.getCalendar().get(Calendar.DAY_OF_YEAR) == day.get(Calendar.DAY_OF_YEAR) && holiDay.getCalendar().get(Calendar.YEAR) == day.get(Calendar.YEAR)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean dayIsPresentDay(Calendar day) {
+        List<PresentDay> presentDays = mCalendarProperties.getPresentDays();
+        for (PresentDay presentDay : presentDays) {
+            if (presentDay.getCalendar().get(Calendar.DAY_OF_YEAR) == day.get(Calendar.DAY_OF_YEAR) && presentDay.getCalendar().get(Calendar.YEAR) == day.get(Calendar.YEAR)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void selectManyDays(View view, Calendar day) {
@@ -183,5 +248,6 @@ public class DayRowClickListener implements AdapterView.OnItemClickListener {
 
         eventDay.setEnabled(enabledDay);
         mCalendarProperties.getOnDayClickListener().onDayClick(eventDay);
+
     }
 }

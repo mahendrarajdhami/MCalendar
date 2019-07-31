@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import com.annimon.stream.Stream;
 
 import java.util.ArrayList;
@@ -65,8 +64,9 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
 
         setLabelColors(dayLabel, day);
         //setEventColor(dayLabel,day);
-        setLeaveColor(dayLabel,day);
-        setPresentColor(dayLabel,day);
+        setLeaveColor(dayLabel, day);
+        setPresentColor(dayLabel, day);
+        setHolidayColor(dayLabel, day);
 
         int yr = day.get(Calendar.YEAR);
         int mn = day.get(Calendar.MONTH);
@@ -83,8 +83,8 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
     private void setLabelColors(TextView dayLabel, Calendar day) {
         // Setting not current month day color
         int tempDay = day.get(Calendar.DAY_OF_WEEK);
-        if(isCurrentMonthDay(day) && tempDay == 7){ //saturday
-            DayColorsUtils.setSaturdayColor(dayLabel,mCalendarProperties);
+        if (isCurrentMonthDay(day) && tempDay == 7) { //saturday
+            DayColorsUtils.setSaturdayColor(dayLabel, mCalendarProperties);
             //DayColorsUtils.setDayColors(dayLabel, mCalendarProperties.getSaturdaysLabelsColor(), Typeface.NORMAL, R.drawable.background_transparent);
             return;
 
@@ -152,7 +152,7 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
         });
     }
 
-    private void setEventColor(TextView dayLabel,Calendar day){
+    private void setEventColor(TextView dayLabel, Calendar day) {
 
         if (mCalendarProperties.getEventDays() == null || !mCalendarProperties.getEventsEnabled()) {
             return;
@@ -160,19 +160,19 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
 
         Stream.of(mCalendarProperties.getEventDays()).filter(eventDate ->
                 eventDate.getCalendar().equals(day)).findFirst().executeIfPresent(eventDay -> {
-                    DayColorsUtils.setSaturdayColor(dayLabel,mCalendarProperties);
+            DayColorsUtils.setSaturdayColor(dayLabel, mCalendarProperties);
 
-                    // If a day doesn't belong to current month then background is transparent
-                    if (!isCurrentMonthDay(day) || !isActiveDay(day)) {
-                        //dayIcon.setAlpha(0.12f);
-                    }
+            // If a day doesn't belong to current month then background is transparent
+            if (!isCurrentMonthDay(day) || !isActiveDay(day)) {
+                //dayIcon.setAlpha(0.12f);
+            }
 
         });
 
 
     }
 
-    private void setLeaveColor(TextView dayLabel,Calendar day){
+    private void setLeaveColor(TextView dayLabel, Calendar day) {
 
         if (mCalendarProperties.getLeaveDays() == null || !mCalendarProperties.getLeavesEnabled()) {
             return;
@@ -180,21 +180,40 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
 
         Stream.of(mCalendarProperties.getLeaveDays())
                 .filter(leaveDate ->
-                leaveDate.getCalendar().equals(day)).findFirst().executeIfPresent(eventDay -> {
+                        leaveDate.getCalendar().equals(day)).findFirst().executeIfPresent(eventDay -> {
 
-                    DayColorsUtils.setLeaveDayColor(dayLabel,mCalendarProperties);
+            DayColorsUtils.setLeaveDayColor(dayLabel, mCalendarProperties);
 
-                    // If a day doesn't belong to current month then background is transparent
-                    if (!isCurrentMonthDay(day) || !isActiveDay(day)) {
-                        dayLabel.setAlpha(0.12f);
-                    }
+            // If a day doesn't belong to current month then background is transparent
+            if (!isCurrentMonthDay(day) || !isActiveDay(day)) {
+                dayLabel.setAlpha(0.12f);
+            }
 
         });
 
 
     }
 
-    private void setPresentColor(TextView dayLabel,Calendar day){
+    private void setHolidayColor(TextView view, Calendar day){
+        if (mCalendarProperties.getHoliDays() == null || !mCalendarProperties.getHolidayEnabled()) {
+            return;
+        }
+
+        Stream.of(mCalendarProperties.getHoliDays())
+                .filter(holiDay ->
+                        holiDay.getCalendar().equals(day)).findFirst().executeIfPresent(eventDay -> {
+
+            DayColorsUtils.setSaturdayColor(view, mCalendarProperties);
+
+            // If a day doesn't belong to current month then background is transparent
+            if (!isCurrentMonthDay(day) || !isActiveDay(day)) {
+                view.setAlpha(0.12f);
+            }
+
+        });
+    }
+
+    private void setPresentColor(TextView dayLabel, Calendar day) {
 
         if (mCalendarProperties.getPresentDays() == null || !mCalendarProperties.getPresentEnabled()) {
             return;
@@ -204,7 +223,7 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
                 .filter(presentDate ->
                         presentDate.getCalendar().equals(day)).findFirst().executeIfPresent(eventDay -> {
 
-            DayColorsUtils.setPresentDayColor(dayLabel,mCalendarProperties);
+            DayColorsUtils.setPresentDayColor(dayLabel, mCalendarProperties);
 
             // If a day doesn't belong to current month then background is transparent
             if (!isCurrentMonthDay(day) || !isActiveDay(day)) {

@@ -12,6 +12,7 @@ import java.util.List;
 
 import np.com.mahendrarajdhami.mcalendar.CalendarView;
 import np.com.mahendrarajdhami.mcalendar.EventDay;
+import np.com.mahendrarajdhami.mcalendar.HoliDay;
 import np.com.mahendrarajdhami.mcalendar.LeaveDay;
 import np.com.mahendrarajdhami.mcalendar.PresentDay;
 import np.com.mahendrarajdhami.mcalendar.R;
@@ -39,11 +40,14 @@ public class CalendarProperties {
     private int mCalendarType, mHeaderColor, mHeaderLabelColor, mSelectionColor, mTodayLabelColor,
             mDialogButtonsColor, mItemLayoutResource, mDisabledDaysLabelsColor, mPagesColor,
             mAbbreviationsBarColor, mAbbreviationsLabelsColor, mDaysLabelsColor, mSelectionLabelColor,
-            mAnotherMonthsDaysLabelsColor,mSaturdaydaysLabelsColor,mLeavedaysLabelsColor,mPresentdaysLabelsColor, mHeaderVisibility;
+            mAnotherMonthsDaysLabelsColor, mSaturdaydaysLabelsColor, mLeavedaysLabelsColor, mPresentdaysLabelsColor, mHeaderVisibility;
 
     private boolean mEventsEnabled;
     private boolean mLeavesEnabled;
     private boolean mPresentEnabled;
+    private boolean mHolidayEnabled;
+
+
     private boolean mSwipeEnabled;
 
     private Drawable mPreviousButtonSrc, mForwardButtonSrc;
@@ -62,6 +66,15 @@ public class CalendarProperties {
     private List<PresentDay> mPresentDays = new ArrayList<>();
     private List<Calendar> mDisabledDays = new ArrayList<>();
     private List<SelectedDay> mSelectedDays = new ArrayList<>();
+    private List<HoliDay> mHoliDays = new ArrayList<>();
+
+    public List<HoliDay> getHoliDays() {
+        return mHoliDays;
+    }
+
+    public void setHoliDays(List<HoliDay> mHoliDays) {
+        this.mHoliDays = mHoliDays;
+    }
 
     private Context mContext;
 
@@ -313,7 +326,7 @@ public class CalendarProperties {
             throw new UnsupportedMethodsException(ErrorsMessages.ONE_DAY_PICKER_MULTIPLE_SELECTION);
         }
 
-        if(mCalendarType == CalendarView.RANGE_PICKER && !DateUtils.isFullDatesRange(selectedDays)){
+        if (mCalendarType == CalendarView.RANGE_PICKER && !DateUtils.isFullDatesRange(selectedDays)) {
             throw new UnsupportedMethodsException(ErrorsMessages.RANGE_PICKER_NOT_RANGE);
         }
 
@@ -415,6 +428,14 @@ public class CalendarProperties {
             return ContextCompat.getColor(mContext, R.color.colorPresent);
         }
         return mPresentdaysLabelsColor;
+    }
+
+    public boolean getHolidayEnabled() {
+        return mHolidayEnabled;
+    }
+
+    public void setHolidayEnabled(boolean mHolidayEnabled) {
+        this.mHolidayEnabled = mHolidayEnabled;
     }
 
     public void setAnotherMonthsDaysLabelsColor(int anotherMonthsDaysLabelsColor) {

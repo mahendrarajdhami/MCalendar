@@ -3,7 +3,6 @@ package np.com.mahendrarajdhami.mcalendar.utils;
 import android.graphics.Typeface;
 import android.widget.TextView;
 
-
 import java.util.Calendar;
 
 import np.com.mahendrarajdhami.mcalendar.R;
@@ -90,8 +89,16 @@ public class DayColorsUtils {
             setDayColors(dayLabel, calendarProperties.getTodayLabelColor(), Typeface.BOLD,
                     R.drawable.background_transparent);
         } else {
-            setDayColors(dayLabel, calendarProperties.getDaysLabelsColor(), Typeface.NORMAL,
-                    R.drawable.background_transparent);
+            if (day.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY) {
+                setDayColors(dayLabel, calendarProperties.getDaysLabelsColor(), Typeface.NORMAL,
+                        R.drawable.background_transparent);
+
+            } else {
+                setSaturdayColor(dayLabel, calendarProperties);
+            }
+
         }
+
+
     }
 }
