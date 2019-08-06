@@ -65,8 +65,8 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
         setLabelColors(dayLabel, day);
         //setEventColor(dayLabel,day);
         setLeaveColor(dayLabel, day);
-        setPresentColor(dayLabel, day);
         setHolidayColor(dayLabel, day);
+        setPresentColor(dayLabel, day);
 
         int yr = day.get(Calendar.YEAR);
         int mn = day.get(Calendar.MONTH);

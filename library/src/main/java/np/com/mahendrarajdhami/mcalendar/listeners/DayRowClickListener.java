@@ -77,7 +77,9 @@ public class DayRowClickListener implements AdapterView.OnItemClickListener {
 
         if (isAnotherDaySelected(previousSelectedDay, day)) {
             selectDay(dayLabel, day);
-            if (dayIsHoliday(previousSelectedDay.getCalendar())) {
+            if (dayIsPresentDay(previousSelectedDay.getCalendar())) {
+                reversePresentColor(previousSelectedDay);
+            } else if (dayIsHoliday(previousSelectedDay.getCalendar())) {
                 if (previousSelectedDay.getCalendar().get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY) {
                     reverseHolidayColor(previousSelectedDay);
                 } else {
@@ -85,13 +87,10 @@ public class DayRowClickListener implements AdapterView.OnItemClickListener {
                 }
             } else if (dayIsLeaveDay(previousSelectedDay.getCalendar())) {
                 reverseLeaveColor(previousSelectedDay);
-            } else if (dayIsPresentDay(previousSelectedDay.getCalendar())) {
-                reversePresentColor(previousSelectedDay);
             } else {
                 reverseUnselectedColor(previousSelectedDay);
             }
         }
-
 
     }
 
