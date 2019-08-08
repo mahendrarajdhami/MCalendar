@@ -23,6 +23,7 @@ import np.com.mahendrarajdhami.mcalendar.exceptions.OutOfDateRangeException;
 import np.com.mahendrarajdhami.mcalendar.extensions.CalendarViewPager;
 import np.com.mahendrarajdhami.mcalendar.listeners.OnCalendarPageChangeListener;
 import np.com.mahendrarajdhami.mcalendar.listeners.OnDayClickListener;
+import np.com.mahendrarajdhami.mcalendar.utils.AbsentDay;
 import np.com.mahendrarajdhami.mcalendar.utils.AppearanceUtils;
 import np.com.mahendrarajdhami.mcalendar.utils.CalendarProperties;
 import np.com.mahendrarajdhami.mcalendar.utils.DateUtils;
@@ -175,6 +176,7 @@ public class CalendarView extends LinearLayout {
         mCalendarProperties.setPresentEnabled(true);
 
         mCalendarProperties.setHolidayEnabled(true);
+        mCalendarProperties.setAbsentEnabled(true);
 
         boolean swipeEnabled = typedArray.getBoolean(R.styleable.CalendarView_swipeEnabled, true);
         mCalendarProperties.setSwipeEnabled(swipeEnabled);
@@ -428,6 +430,13 @@ public class CalendarView extends LinearLayout {
     public void setPresents(List<PresentDay> presentDays) {
         if (mCalendarProperties.getPresentEnabled()) {
             mCalendarProperties.setPresentDays(presentDays);
+            mCalendarPageAdapter.notifyDataSetChanged();
+        }
+    }
+
+    public void setAbsents(List<AbsentDay> absentDays) {
+        if (mCalendarProperties.getAbsentEnabled()) {
+            mCalendarProperties.setAbsentDays(absentDays);
             mCalendarPageAdapter.notifyDataSetChanged();
         }
     }

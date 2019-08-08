@@ -40,12 +40,14 @@ public class CalendarProperties {
     private int mCalendarType, mHeaderColor, mHeaderLabelColor, mSelectionColor, mTodayLabelColor,
             mDialogButtonsColor, mItemLayoutResource, mDisabledDaysLabelsColor, mPagesColor,
             mAbbreviationsBarColor, mAbbreviationsLabelsColor, mDaysLabelsColor, mSelectionLabelColor,
-            mAnotherMonthsDaysLabelsColor, mSaturdaydaysLabelsColor, mLeavedaysLabelsColor, mPresentdaysLabelsColor, mHeaderVisibility;
+            mAnotherMonthsDaysLabelsColor, mSaturdaydaysLabelsColor, mLeavedaysLabelsColor,mAbsentColor, mPresentdaysLabelsColor, mHeaderVisibility;
 
     private boolean mEventsEnabled;
     private boolean mLeavesEnabled;
     private boolean mPresentEnabled;
     private boolean mHolidayEnabled;
+    private boolean mAbsentEnabled;
+
 
 
     private boolean mSwipeEnabled;
@@ -62,7 +64,11 @@ public class CalendarProperties {
     private OnCalendarPageChangeListener mOnForwardPageChangeListener;
 
     private List<EventDay> mEventDays = new ArrayList<>();
+
+
+
     private List<LeaveDay> mLeaveDays = new ArrayList<>();
+    private List<AbsentDay> mAbsentDays = new ArrayList<>();
     private List<PresentDay> mPresentDays = new ArrayList<>();
     private List<Calendar> mDisabledDays = new ArrayList<>();
     private List<SelectedDay> mSelectedDays = new ArrayList<>();
@@ -70,6 +76,14 @@ public class CalendarProperties {
 
     public List<HoliDay> getHoliDays() {
         return mHoliDays;
+    }
+
+    public List<AbsentDay> getAbsentDays() {
+        return mAbsentDays;
+    }
+
+    public void setAbsentDays(List<AbsentDay> mAbsentDays) {
+        this.mAbsentDays = mAbsentDays;
     }
 
     public void setHoliDays(List<HoliDay> mHoliDays) {
@@ -298,6 +312,14 @@ public class CalendarProperties {
         return mDisabledDays;
     }
 
+    public boolean getAbsentEnabled() {
+        return mAbsentEnabled;
+    }
+
+    public void setAbsentEnabled(boolean mAbsentEnabled) {
+        this.mAbsentEnabled = mAbsentEnabled;
+    }
+
     public void setDisabledDays(List<Calendar> disabledDays) {
         mSelectedDays.removeAll(disabledDays);
 
@@ -421,6 +443,13 @@ public class CalendarProperties {
         }
         return mLeavedaysLabelsColor;
     }
+    public int getAbsentDaysLabelsColor() {
+
+        if (mAbsentColor == 0) {
+            return ContextCompat.getColor(mContext, R.color.colorAbsent);
+        }
+        return mAbsentColor;
+    }
 
     public int getPresentDaysLabelsColor() {
 
@@ -449,6 +478,10 @@ public class CalendarProperties {
     public void setLeavesDaysLabelsColor(int tempColor) {
         mLeavedaysLabelsColor = tempColor;
     }
+    public void setAbsentDaysLabelsColor(int tempColor) {
+        mAbsentColor = tempColor;
+    }
+
 
     public int getHeaderVisibility() {
         return mHeaderVisibility;

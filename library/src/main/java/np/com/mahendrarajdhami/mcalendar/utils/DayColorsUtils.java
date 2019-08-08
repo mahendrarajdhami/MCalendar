@@ -1,6 +1,7 @@
 package np.com.mahendrarajdhami.mcalendar.utils;
 
 import android.graphics.Typeface;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.util.Calendar;
@@ -46,6 +47,14 @@ public class DayColorsUtils {
                 R.drawable.background_color_circle_selector);
 
         dayLabel.getBackground().setColorFilter(calendarProperties.getLeavesDaysLabelsColor(),
+                android.graphics.PorterDuff.Mode.MULTIPLY);
+    }
+
+    public static void setAbsentDayColor(TextView dayLabel, CalendarProperties calendarProperties) {
+        setDayColors(dayLabel, calendarProperties.getSelectionLabelColor(), Typeface.NORMAL,
+                R.drawable.background_color_circle_selector);
+
+        dayLabel.getBackground().setColorFilter(calendarProperties.getAbsentDaysLabelsColor(),
                 android.graphics.PorterDuff.Mode.MULTIPLY);
     }
 

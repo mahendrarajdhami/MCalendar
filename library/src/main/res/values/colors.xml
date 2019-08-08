@@ -9,7 +9,8 @@
 
     <!--Days Color-->
     <color name="colorSaturday">#FF8CCA</color>
-    <color name="colorLeave">#ffcc0000</color>
+    <color name="colorLeave">#F39C12</color>
+    <color name="colorAbsent">#ffcc0000</color>
     <color name="colorPresent">#4AFF1E</color>
 
 </resources>

@@ -16,11 +16,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import np.com.mahendrarajdhami.mcalendar.CalendarView;
 import np.com.mahendrarajdhami.mcalendar.R;
+import np.com.mahendrarajdhami.mcalendar.utils.AbsentDay;
 import np.com.mahendrarajdhami.mcalendar.utils.CalendarProperties;
-import np.com.mahendrarajdhami.mcalendar.utils.DateConverter;
 import np.com.mahendrarajdhami.mcalendar.utils.DateUtils;
 import np.com.mahendrarajdhami.mcalendar.utils.DayColorsUtils;
 import np.com.mahendrarajdhami.mcalendar.utils.ImageUtils;
@@ -34,7 +35,7 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
     private Calendar mToday = DateUtils.getCalendar();
 
     private CalendarProperties mCalendarProperties;
-    DateConverter dc;
+    //DateConverter dc;
 
     CalendarDayAdapter(CalendarPageAdapter calendarPageAdapter, Context context, CalendarProperties calendarProperties, ArrayList<Date> dates, int pageMonth) {
         super(context, calendarProperties.getItemLayoutResource(), dates);
@@ -52,7 +53,7 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
         }
 
         TextView dayLabel = (TextView) view.findViewById(R.id.dayLabel);
-        ImageView dayIcon = (ImageView) view.findViewById(R.id.dayIcon);
+        //ImageView dayIcon = (ImageView) view.findViewById(R.id.dayIcon);
 
         Calendar day = new GregorianCalendar();
         day.setTime(getItem(position));
@@ -64,6 +65,7 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
 
         setLabelColors(dayLabel, day);
         //setEventColor(dayLabel,day);
+        setAbsentColors(dayLabel, day);
         setLeaveColor(dayLabel, day);
         setHolidayColor(dayLabel, day);
         setPresentColor(dayLabel, day);
@@ -71,13 +73,36 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
         int yr = day.get(Calendar.YEAR);
         int mn = day.get(Calendar.MONTH);
         int d = day.get(Calendar.DAY_OF_MONTH);
-        dc = new DateConverter();
+        //dc = new DateConverter();
 
         //Model tempModel = dc.getNepaliDate(day);
         //dayLabel.setText(String.valueOf(day.get(Calendar.DAY_OF_MONTH))+"/"+MDateConversion.getNepaliDate(yr,mn,d,"1",3));
         //dayLabel.setText(String.valueOf(day.get(Calendar.DAY_OF_MONTH))+"/"+tempModel.getDay());
         dayLabel.setText(String.valueOf(day.get(Calendar.DAY_OF_MONTH)));
         return view;
+    }
+
+    private void setAbsentColors(TextView dayLabel, Calendar day) {
+
+        if (mCalendarProperties.getAbsentDays() == null || !mCalendarProperties.getAbsentEnabled()) {
+            return;
+        }
+        boolean exist = false;
+        List<AbsentDay> absentDays = mCalendarProperties.getAbsentDays();
+        for (AbsentDay absentDay : absentDays) {
+            if (absentDay.getCalendar().get(Calendar.YEAR) == day.get(Calendar.YEAR) && absentDay.getCalendar().get(Calendar.DAY_OF_YEAR) == day.get(Calendar.DAY_OF_YEAR)) {
+                exist = true;
+                break;
+            }
+        }
+        if (exist) {
+            DayColorsUtils.setAbsentDayColor(dayLabel, mCalendarProperties);
+
+            // If a day doesn't belong to current month then background is transparent
+            if (!isCurrentMonthDay(day) || !isActiveDay(day)) {
+                dayLabel.setAlpha(0.12f);
+            }
+        }
     }
 
     private void setLabelColors(TextView dayLabel, Calendar day) {
@@ -194,7 +219,7 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
 
     }
 
-    private void setHolidayColor(TextView view, Calendar day){
+    private void setHolidayColor(TextView view, Calendar day) {
         if (mCalendarProperties.getHoliDays() == null || !mCalendarProperties.getHolidayEnabled()) {
             return;
         }

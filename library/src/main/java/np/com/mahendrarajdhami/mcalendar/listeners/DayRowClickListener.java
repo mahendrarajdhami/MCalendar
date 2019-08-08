@@ -19,6 +19,7 @@ import np.com.mahendrarajdhami.mcalendar.LeaveDay;
 import np.com.mahendrarajdhami.mcalendar.PresentDay;
 import np.com.mahendrarajdhami.mcalendar.R;
 import np.com.mahendrarajdhami.mcalendar.adapters.CalendarPageAdapter;
+import np.com.mahendrarajdhami.mcalendar.utils.AbsentDay;
 import np.com.mahendrarajdhami.mcalendar.utils.CalendarProperties;
 import np.com.mahendrarajdhami.mcalendar.utils.DateUtils;
 import np.com.mahendrarajdhami.mcalendar.utils.DayColorsUtils;
@@ -87,11 +88,27 @@ public class DayRowClickListener implements AdapterView.OnItemClickListener {
                 }
             } else if (dayIsLeaveDay(previousSelectedDay.getCalendar())) {
                 reverseLeaveColor(previousSelectedDay);
+            } else if (dayIsAbsentDay(previousSelectedDay.getCalendar())) {
+                reverseAbsentColor(previousSelectedDay);
             } else {
                 reverseUnselectedColor(previousSelectedDay);
             }
         }
 
+    }
+
+    private void reverseAbsentColor(SelectedDay previousSelectedDay) {
+        DayColorsUtils.setAbsentDayColor((TextView) previousSelectedDay.getView(), mCalendarProperties);
+    }
+
+    private boolean dayIsAbsentDay(Calendar calendar) {
+        List<AbsentDay> absentDays = mCalendarProperties.getAbsentDays();
+        for (AbsentDay absentDay : absentDays) {
+            if (absentDay.getCalendar().get(Calendar.DAY_OF_YEAR) == calendar.get(Calendar.DAY_OF_YEAR) && absentDay.getCalendar().get(Calendar.YEAR) == calendar.get(Calendar.YEAR)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
